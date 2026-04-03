@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/${{ github.repository_owner }}/k8s-gitops-platform/demo-api
+  IMAGE: ghcr.io/Skanderba8/k8s-gitops-platform/demo-api
 
 jobs:
   test:
