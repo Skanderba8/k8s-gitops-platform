@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-api-prod
+  namespace: argocd
+spec:
+  project: gitops-platform
+  source:
+    repoURL: https://github.com/Skanderba8/k8s-gitops-platform.git
+    targetRevision: HEAD
+    path: charts/demo-api
+    helm:
+      valueFiles:
+        - ../../manifests/envs/prod/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
