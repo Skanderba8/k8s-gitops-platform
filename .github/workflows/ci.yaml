@@ -53,7 +53,7 @@ jobs:
 
       - name: Update image tag in dev values
         run: |
-          sed -i "s|tag:.*|tag: \"${{ github.sha }}\"|" manifests/argocd/app-dev.yaml
+          sed -i "/name: image.tag/{n;s|value:.*|value: \"${{ github.sha }}\"|}" manifests/argocd/app-dev.yaml
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add manifests/argocd/app-dev.yaml

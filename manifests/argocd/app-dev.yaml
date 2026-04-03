@@ -10,12 +10,13 @@ spec:
     targetRevision: HEAD
     path: charts/demo-api
     helm:
-      values: |
-        replicaCount: 1
-        env:
-          APP_ENV: dev
-        image:
-          tag: "6514badb88c51c3bfbe594ec466497572001cd66"
+      parameters:
+        - name: image.tag
+          value: "latest"
+        - name: replicaCount
+          value: "1"
+        - name: env.APP_ENV
+          value: dev
   destination:
     server: https://kubernetes.default.svc
     namespace: dev

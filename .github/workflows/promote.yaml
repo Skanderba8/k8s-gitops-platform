@@ -16,8 +16,8 @@ jobs:
 
       - name: Copy dev tag to prod
         run: |
-          DEV_TAG=$(grep 'tag:' manifests/argocd/app-dev.yaml | awk '{print $2}' | tr -d '"' | head -1)
-          sed -i "s|tag:.*|tag: \"$DEV_TAG\"|" manifests/argocd/app-prod.yaml
+          DEV_TAG=$(grep -A1 "name: image.tag" manifests/argocd/app-dev.yaml | grep value | awk '{print $2}' | tr -d '"')
+          sed -i "/name: image.tag/{n;s|value:.*|value: \"$DEV_TAG\"|}" manifests/argocd/app-prod.yaml
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add manifests/argocd/app-prod.yaml
