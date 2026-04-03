@@ -10,8 +10,12 @@ spec:
     targetRevision: HEAD
     path: charts/demo-api
     helm:
-      valueFiles:
-        - ../../manifests/envs/dev/values.yaml
+      values: |
+        replicaCount: 1
+        env:
+          APP_ENV: dev
+        image:
+          tag: "latest"
   destination:
     server: https://kubernetes.default.svc
     namespace: dev
