@@ -15,7 +15,7 @@ spec:
         env:
           APP_ENV: dev
         image:
-          tag: "latest"
+          tag: "6514badb88c51c3bfbe594ec466497572001cd66"
   destination:
     server: https://kubernetes.default.svc
     namespace: dev
