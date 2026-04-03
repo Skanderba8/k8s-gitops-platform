@@ -16,10 +16,10 @@ jobs:
 
       - name: Copy dev tag to prod
         run: |
-          DEV_TAG=$(grep 'tag:' manifests/envs/dev/values.yaml | awk '{print $2}' | tr -d '"')
-          sed -i "s|tag:.*|tag: \"$DEV_TAG\"|" manifests/envs/prod/values.yaml
+          DEV_TAG=$(grep 'tag:' manifests/argocd/app-dev.yaml | awk '{print $2}' | tr -d '"' | head -1)
+          sed -i "s|tag:.*|tag: \"$DEV_TAG\"|" manifests/argocd/app-prod.yaml
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add manifests/envs/prod/values.yaml
+          git add manifests/argocd/app-prod.yaml
           git commit -m "ci: promote $DEV_TAG to prod"
           git push
