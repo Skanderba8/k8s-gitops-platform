@@ -1,0 +1,5 @@
+replicaCount: 2
+env:
+  APP_ENV: prod
+image:
+  tag: "latest"
