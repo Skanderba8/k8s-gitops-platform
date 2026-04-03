@@ -6,7 +6,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/Skanderba8/k8s-gitops-platform/demo-api
 
 jobs:
   test:
@@ -47,8 +46,10 @@ jobs:
 
       - name: Build and push image
         run: |
-          docker build -t ${{ env.IMAGE }}:${{ github.sha }} ./app
-          docker push ${{ env.IMAGE }}:${{ github.sha }}
+          IMAGE=ghcr.io/$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')/k8s-gitops-platform/demo-api
+          docker build -t $IMAGE:${{ github.sha }} ./app
+          docker push $IMAGE:${{ github.sha }}
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
       - name: Update image tag in dev values
         run: |
