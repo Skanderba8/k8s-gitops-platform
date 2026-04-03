@@ -1,4 +1,4 @@
-# k8s-gitops-platform — GitOps Delivery Platform on Kubernetes
+# kuburnetes-gitops-platform — GitOps Delivery Platform on Kubernetes
 
 A complete GitOps pipeline where merging to a branch is the deployment. ArgoCD watches the repo, any change to a manifest automatically syncs to the cluster. Built to demonstrate declarative infrastructure, multi-environment promotion, and real observability — all at zero cloud cost.
 
