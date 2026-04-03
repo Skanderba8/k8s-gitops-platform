@@ -33,8 +33,8 @@ A complete GitOps pipeline where merging to a branch is the deployment. ArgoCD w
 
 - [x] Phase 1 — Local cluster bootstrap (k3s + ArgoCD)
 - [x] Phase 2 — Application + Helm chart
-- [ ] Phase 3 — GitOps wiring (ArgoCD Applications, dev + prod)
-- [ ] Phase 4 — CI/CD pipeline (GitHub Actions)
+- [x] Phase 3 — GitOps wiring (ArgoCD Applications, dev + prod)
+- [x] Phase 4 — CI/CD pipeline (GitHub Actions)
 - [ ] Phase 5 — Observability (Prometheus + Grafana)
 - [ ] Phase 6 — Security hardening
 - [ ] Phase 7 — Documentation + EKS path
@@ -312,7 +312,14 @@ docker run -p 8000:8000 demo-api
 | `python3-venv` missing on VM | Installed via `sudo apt install python3.12-venv -y` |
 | Docker not installed on VM | Installed via `sudo apt install docker.io -y`, added user to docker group |
 | GitHub push rejected password auth | GitHub dropped password auth — switched to SSH key authentication |
-| GitHub PAT gave 403 on push | Abandoned HTTPS+token approach, switched to SSH key added to GitHub account |
+| GitHub PAT gave 403 on push | Abandoned HTTPS+token, switched to SSH key added to GitHub account |
+| ArgoCD sync `Unknown` — out-of-bounds symlinks | `app/venv/` was committed to GitHub — removed with `git rm -r --cached app/venv/` |
+| ArgoCD not picking up new config after `kubectl apply` | Deleted and recreated Application resources to force fresh config |
+| ghcr.io image pull 403 | Package was private by default — changed to public in GitHub Package settings |
+| CI updating wrong file — pods stuck on `latest` | Switched from inline `values:` block to `parameters:` in ArgoCD Application manifest |
+| `pytest` not found in CI | Added `pytest` to `app/requirements.txt` |
+| Image tag lowercase error in CI | `github.repository_owner` returns mixed case — piped through `tr '[:upper:]' '[:lower:]'` |
+| ArgoCD not syncing after tag update | Deleted and recreated Application to force ArgoCD to re-read the manifest |
 
 ---
 
