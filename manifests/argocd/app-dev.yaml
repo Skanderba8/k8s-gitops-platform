@@ -12,7 +12,7 @@ spec:
     helm:
       parameters:
         - name: image.tag
-          value: "718b70fbf94af7d7ba8590290c6989751a81c1ea"
+          value: "5ea11e60e52b0aa59c48f27726d241cc39c432f5"
         - name: replicaCount
           value: "1"
         - name: env.APP_ENV
