@@ -2,4 +2,4 @@ replicaCount: 1
 env:
   APP_ENV: dev
 image:
-  tag: "latest"
+  tag: "8e28e21337b6b3658a4232269c4e293806936bdb"
